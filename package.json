@@ -27,8 +27,11 @@
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/serve-static": "^2.1.1",
     "@types/mongoose": "^5.7.21",
+    "jsreport-client": "^1.1.2",
     "mongoose": "^5.9.15",
+    "mssql": "^5.1.1",
     "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4"
   },

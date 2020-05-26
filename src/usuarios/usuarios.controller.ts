@@ -30,6 +30,10 @@ export class UsuariosController {
     @Post('/verifica')
     async verifica(@Body() body: any, @Res() res) {
 
+
+
+
+        
         let mires: any = {};
 
         let re: any = await this.usua.verificarusario(body.username)

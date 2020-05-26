@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { FuatController } from './fuat/fuat.controller';
 
-@Module({})
+@Module({
+  controllers: [FuatController]
+})
 export class ReportesModule {}

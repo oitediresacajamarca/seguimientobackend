@@ -10,20 +10,22 @@ export class UsuariosService {
     }
 
     async loguear(username: string, clave: string): Promise<Usuarios> {
-      
+
         const pr = await this.mod.findOne({ login: username, clave: clave });
 
         return pr;
 
     }
-    async loguearyambito(username: string, clave: string,peso:number): Promise<Usuarios> {
-    
+    async loguearyambito(username: string, clave: string, peso: number): Promise<Usuarios> {
+
         const pr = await (await this.mod.findOne(
-            { username: username,
-             clave: clave ,
-             "ambitos.peso":{"$lte": peso},
-             "ambitos.peso_sup":{"$gt":peso}}))
-     
+            {
+                username: username,
+                clave: clave,
+                "ambitos.peso": { "$lte": peso },
+                "ambitos.peso_sup": { "$gt": peso }
+            }))
+
         return pr;
 
     }
