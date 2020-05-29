@@ -1,6 +1,7 @@
-import { Controller, Post, Body, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus, Get } from '@nestjs/common';
 import { LoginDto } from '../dto/login.dto'
 import { UsuariosService } from './usuarios.service';
+var ngfaker = require('ng-faker');
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -66,6 +67,15 @@ export class UsuariosController {
 
 
         return res.status(HttpStatus.OK).json({ mensaje: mires.mensaje, respuesta: re })
+
+    }
+    @Get('generarFake')
+
+   async genrarFake(){
+
+    var randomName = ngfaker.name.firstName()
+    console.log(randomName);
+    return randomName;
 
     }
 
