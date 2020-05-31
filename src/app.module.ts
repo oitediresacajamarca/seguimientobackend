@@ -8,6 +8,7 @@ import{MongooseModule} from '@nestjs/mongoose'
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { ReportesModule } from './reportes/reportes.module';
 import { SolicitudesModule } from './solicitudes/solicitudes.module';
+import { MaestrosModule } from './maestros/maestros.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -16,7 +17,8 @@ import { SolicitudesModule } from './solicitudes/solicitudes.module';
   MongooseModule.forRoot('mongodb://localhost:27017/seguimiento?readPreference=primary&ssl=false',{}),
   UsuariosModule,
   ReportesModule,
-  SolicitudesModule],
+  SolicitudesModule,
+  MaestrosModule],
   controllers: [AppController],
   providers: [AppService],
 })
