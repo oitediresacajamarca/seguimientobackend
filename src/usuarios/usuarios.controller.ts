@@ -21,10 +21,10 @@ export class UsuariosController {
     @Post('login')
     async loging(@Body() login: LoginDto, @Res() res) {
 
-     
+
         console.log(login)
         let re: any = await this.usua.loguearyambito(login.root.username, login.root.clave, login.root.peso)
-       
+
         return res.status(HttpStatus.OK).json({ bien: "bien", respuesta: re })
 
     }
@@ -34,7 +34,7 @@ export class UsuariosController {
 
 
 
-        
+
         let mires: any = {};
 
         let re: any = await this.usua.verificarusario(body.username)
@@ -64,18 +64,18 @@ export class UsuariosController {
         else {
             mires.mensaje = "Existe"
         }
-
+        console.log(body)
 
         return res.status(HttpStatus.OK).json({ mensaje: mires.mensaje, respuesta: re })
 
     }
     @Get('generarFake')
 
-   async genrarFake(){
+    async genrarFake() {
 
-    var randomName = ngfaker.name.firstName()
-    console.log(randomName);
-    return randomName;
+        var randomName = ngfaker.name.firstName()
+        console.log(randomName);
+        return randomName;
 
     }
 

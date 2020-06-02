@@ -25,6 +25,19 @@ var establecimiento = new Schema({
 
 })
 
+var DATOS_PROFESIONALES= new Schema({
+   
+    
+        ID_PROFESION: String,
+        NOMBRE_PROFESION: String,
+        ID_COLEGIO: String,
+        NOMBRE_COLEGIO: String,
+        NOMBRE_ESPECIALIDAD: String,
+        COD_COLEGIATURA: String
+    
+}
+)
+
 export const usuario = new Schema({
     username: String,
     clave: String,
@@ -50,6 +63,7 @@ export const usuario = new Schema({
     TELEFONO: String,
     TIPO_AMBITO_ADMINISTRATIVO: String,
     logueado: String,     
+    DATOS_PROFESIONALES:DATOS_PROFESIONALES
 
 })
 

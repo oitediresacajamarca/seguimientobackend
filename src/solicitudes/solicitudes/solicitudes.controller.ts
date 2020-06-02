@@ -28,5 +28,18 @@ async devolverSolicitud(@Param() cod_busqueda){
     return result;
 }
 
+@Get('solicitud/cerrar/:cod_busqueda')
+async cerrarSolicitud(@Param() cod_busqueda){
+    sql.close()
+
+    await sql.connect(this.urlconect)
+    const consulta=`update [SOLICITUD_PACIENTE] 
+    set [ESTADO]='CERRADO' where ID_SOLICITUD =${cod_busqueda.cod_busqueda} ;
+`
+    const result = await sql.query(consulta) 
+   
+    return result;
+}
+
 
 }
