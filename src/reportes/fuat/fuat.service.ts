@@ -7,8 +7,17 @@ import { Fuat } from '../fuat.interface';
 export class FuatService {
     constructor(@InjectModel('fuat') private mod: Model<Fuat>) { }
 
-    async devuelveId() : Promise<Fuat[]>{
-       const p= await this.mod.find();
-       return p;
+    async devuelveId(): Promise<Fuat[]> {
+        const p = await this.mod.find();
+
+        return p;
     }
+    async crearFuat(fuanueva: Fuat): Promise<Fuat> {
+        const fuatn = new this.mod(fuanueva);
+        return await fuatn.save()
+
+
+
+    }
+
 }

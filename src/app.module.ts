@@ -9,16 +9,24 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { ReportesModule } from './reportes/reportes.module';
 import { SolicitudesModule } from './solicitudes/solicitudes.module';
 import { MaestrosModule } from './maestros/maestros.module';
+import { PersonalModule } from './personal/personal.module';
+import { MorbilidadesModule } from './morbilidades/morbilidades.module';
+import { AtencionesModule } from './atenciones/atenciones.module';
+import{TypeOrmModule} from '@nestjs/typeorm'
 
 @Module({
   imports: [ServeStaticModule.forRoot({
     rootPath: join(__dirname, '/', 'seguimientopacientespersonal'),
   }),
   MongooseModule.forRoot('mongodb://localhost:27017/seguimiento?readPreference=primary&ssl=false',{}),
+  
   UsuariosModule,
   ReportesModule,
   SolicitudesModule,
-  MaestrosModule],
+  MaestrosModule,
+  PersonalModule,
+  MorbilidadesModule,
+  AtencionesModule],
   controllers: [AppController],
   providers: [AppService],
 })

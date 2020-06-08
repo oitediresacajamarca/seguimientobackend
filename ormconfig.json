@@ -1,0 +1,22 @@
+{ 
+    
+        "type": "mssql",
+        "host": "localhost",
+        "port": 1433,
+        "username": "sa",
+        "password": ".",
+        "database": "risc_2030",
+        "synchronize": true,
+        "logging": false,
+        "entities": [
+           "src/entidades/**/*{.ts,.js}"
+        ],
+        "migrations": [
+           "src/migration/**/*.ts"
+        ],
+        "subscribers": [
+           "src/subscriber/**/*.ts"
+        ]   
+
+
+}
