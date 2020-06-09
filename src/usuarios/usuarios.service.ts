@@ -45,6 +45,14 @@ export class UsuariosService {
         return pr;
 
     }
+    async listar_usuarios(){
+        const respuesta = await this.mod.find();
+        return respuesta;
+    }
+    async eliminar_usuario(id:string){
+        const respuesta = await this.mod.findByIdAndDelete(id);
+        return respuesta;
+    }
     
 
 }

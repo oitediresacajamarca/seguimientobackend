@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Res, HttpStatus, Get } from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus, Get, Param } from '@nestjs/common';
 import { LoginDto } from '../dto/login.dto'
 import { UsuariosService } from './usuarios.service';
 var ngfaker = require('ng-faker');
@@ -76,6 +76,19 @@ export class UsuariosController {
         var randomName = ngfaker.name.firstName()
         console.log(randomName);
         return randomName;
+
+    }
+    @Get('listar')
+    async   listar_usuarios() {
+        const res = await this.usua.listar_usuarios()
+        return res;
+    }
+    @Get('eliminar/:id')
+    async eliminar_usuario(@Param() id: any) {
+
+        console.log(id)
+        const res = await this.usua.eliminar_usuario(id.id);
+        return res;
 
     }
 
