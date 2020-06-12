@@ -19,7 +19,7 @@ import{TypeOrmModule} from '@nestjs/typeorm'
     rootPath: join(__dirname, '/', 'seguimientopacientespersonal'),
   }),
   MongooseModule.forRoot('mongodb://localhost:27017/seguimiento?readPreference=primary&ssl=false',{}),
-  
+  TypeOrmModule.forRoot(),
   UsuariosModule,
   ReportesModule,
   SolicitudesModule,

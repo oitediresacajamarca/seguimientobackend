@@ -5,3 +5,4 @@ import { SolicitudesController } from './solicitudes/solicitudes.controller';
   controllers: [SolicitudesController]
 })
 export class SolicitudesModule {}
+

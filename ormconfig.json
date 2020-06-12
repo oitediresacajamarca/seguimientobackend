@@ -6,10 +6,10 @@
         "username": "sa",
         "password": ".",
         "database": "risc_2030",
-        "synchronize": true,
+        "synchronize": false,
         "logging": false,
         "entities": [
-           "src/entidades/**/*{.ts,.js}"
+           "dist/entidades/**/*{.ts,.js}"
         ],
         "migrations": [
            "src/migration/**/*.ts"
