@@ -13,6 +13,7 @@ import { PersonalModule } from './personal/personal.module';
 import { MorbilidadesModule } from './morbilidades/morbilidades.module';
 import { AtencionesModule } from './atenciones/atenciones.module';
 import{TypeOrmModule} from '@nestjs/typeorm'
+import { PersonaModule } from './persona/persona.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -26,7 +27,8 @@ import{TypeOrmModule} from '@nestjs/typeorm'
   MaestrosModule,
   PersonalModule,
   MorbilidadesModule,
-  AtencionesModule],
+  AtencionesModule,
+  PersonaModule],
   controllers: [AppController],
   providers: [AppService],
 })

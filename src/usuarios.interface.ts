@@ -10,5 +10,7 @@ export interface Usuarios extends Document{
         cod_ambito: string;
     }[];
     establecimientos:{cod_ipress:string}[      
-    ]
+    ];
+    estado:string,
+    roles:string[]
 }

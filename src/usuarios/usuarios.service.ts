@@ -45,14 +45,20 @@ export class UsuariosService {
         return pr;
 
     }
-    async listar_usuarios(){
+    async listar_usuarios() {
         const respuesta = await this.mod.find();
         return respuesta;
     }
-    async eliminar_usuario(id:string){
+    async eliminar_usuario(id: string) {
         const respuesta = await this.mod.findByIdAndDelete(id);
         return respuesta;
     }
-    
+    async actualizar_usuario(id: number, datos) {
+        const usuario = await this.mod.updateMany({ "id_persona": id }, { "clave": datos.newpassword,"estado":datos.estado })
+
+        console.log(datos)
+        return usuario;
+    }
+
 
 }

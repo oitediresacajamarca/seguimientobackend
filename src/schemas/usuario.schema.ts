@@ -63,7 +63,9 @@ export const usuario = new Schema({
     TELEFONO: String,
     TIPO_AMBITO_ADMINISTRATIVO: String,
     logueado: String,     
-    DATOS_PROFESIONALES:DATOS_PROFESIONALES
+    DATOS_PROFESIONALES:DATOS_PROFESIONALES,
+    estado:String,
+    roles:[String]
 
 })
 
