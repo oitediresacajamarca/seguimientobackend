@@ -1,9 +1,10 @@
 import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
+import { Console } from 'console';
 var mssql = require('mssql')
 
 @Controller('personal')
 export class PersonalController {
-
+    cadena_conexion='mssql://sa:.@localhost/risc_2030'
     @Get(':id/:ipress')
     async devolverCodigoTrabajadorIpress(@Param('id') id, @Param('ipress') ipress, @Res() res) {
         let respuesta: any;
@@ -11,13 +12,15 @@ export class PersonalController {
 
 
         mssql.close();
-        await mssql.connect('mssql://sa:.@localhost/risc_2030')
+        await mssql.connect(this.cadena_conexion)
 
         const consulta = `SELECT *
         FROM [TRABAJADOR_IPRESS]
-        WHERE ID_PERSONA LIKE '${id}%'  ; `
-
+        WHERE ID_PERSONA = ${id}  ; `
+        console.log(consulta);
         const result = await mssql.query(consulta)
+        console.log(result)
+        console.log('ddf')
         if (result.recordset.length > 0) {
             let resulfi = result.recordset.filter(element =>
                 element.ID_IPRESS == ipress
@@ -35,15 +38,33 @@ export class PersonalController {
                 const actualiza = await mssql.query(actualizacon)
                 const consulta2 = `SELECT *
                 FROM [TRABAJADOR_IPRESS]
-                WHERE ID_PERSONA LIKE '${id}%'  and ID_IPRESS= '${ipress}'; `
+                WHERE ID_PERSONA = ${id}  and ID_IPRESS= '${ipress}'; `
 
                 const result = await mssql.query(consulta2)
                 respuesta = result.recordset[0];
-               
+
 
 
 
             }
+        }
+        else {
+            console.log("no encontro")
+
+
+            const actualizacon = `insert into TRABAJADOR_IPRESS(ID_PERSONA,ID_IPRESS) values(${id},'${ipress}') ; `
+
+            const actualiza = await mssql.query(actualizacon)
+            const consulta2 = `SELECT *
+            FROM [TRABAJADOR_IPRESS]
+            WHERE ID_PERSONA = ${id}  and ID_IPRESS= '${ipress}'; `
+
+            const result = await mssql.query(consulta2)
+            respuesta = result.recordset[0];
+
+
+
+
         }
 
         return res.status(HttpStatus.OK).json({ recordset: [respuesta], rowsAffected: 1, respuesta: { identiti: identiti } })

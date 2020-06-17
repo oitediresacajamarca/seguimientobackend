@@ -49,6 +49,10 @@ export class UsuariosService {
         const respuesta = await this.mod.find();
         return respuesta;
     }
+    async listar_usuarios_ambito(peso:number,peso_sup:number) {
+        const respuesta = await this.mod.find({"ambitos.peso":{"$gte":peso},"ambitos.peso_sup":{"$lte":peso_sup}});
+        return respuesta;
+    }
     async eliminar_usuario(id: string) {
         const respuesta = await this.mod.findByIdAndDelete(id);
         return respuesta;

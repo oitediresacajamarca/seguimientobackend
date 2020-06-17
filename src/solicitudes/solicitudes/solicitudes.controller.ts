@@ -9,7 +9,7 @@ export class SolicitudesController {
     async devolverSolicitudes(@Param() cod_busqueda) {
         sql.close()
 
-        await sql.connect('mssql://sa:.@localhost/risc_2030')
+        await sql.connect(this.urlconect)
         const consulta = `select * from SOLICITUDES_NOTIFICACION where cod_busqueda like '${cod_busqueda.cod_busqueda}%' ;
 `
         const result = await sql.query(consulta)

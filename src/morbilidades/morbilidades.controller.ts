@@ -2,6 +2,7 @@ import { Controller, Param, Get, Res, HttpStatus } from '@nestjs/common';
 var mssql = require('mssql')
 @Controller('morbilidades')
 export class MorbilidadesController {
+    cadena_conexion='mssql://sa:.@localhost/risc_2030'
 
     @Get('/:ID_PACIENTE')
     async devolver(@Param('ID_PACIENTE') ID_PACIENTE:string ,@Res() res) {
@@ -9,7 +10,7 @@ export class MorbilidadesController {
         
 
         mssql.close();
-        await mssql.connect('mssql://sa:.@localhost/risc_2030')
+        await mssql.connect(this.cadena_conexion)
 
         const consulta = `SELECT  [NRO_DOCUMENTO]
         ,[ID_CIE]

@@ -10,7 +10,7 @@ export class AtencionesController {
     async  registrar(@Body() nuevaaatencion) {
         console.log(nuevaaatencion)
         mssql.close();
-        let consulta = await mssql.connect('mssql://sa:.@localhost/risc_2030')
+        let consulta = await mssql.connect(cadena_conexion)
         let insert = `
 
                 INSERT INTO [dbo].[ATENCION]
@@ -33,8 +33,8 @@ export class AtencionesController {
                         ,${nuevaaatencion.ID_HC}
                         ,${nuevaaatencion.ID_TIPO_ATENCION}
                         ,${nuevaaatencion.ID_RESPONSABLE}
-                        ,${nuevaaatencion.FECHA}
-                        ,${nuevaaatencion.HORA}
+                        ,'${nuevaaatencion.FECHA}'
+                        ,cast('${nuevaaatencion.HORA}' as TIME)
                         ,'${nuevaaatencion.ANTECEDENTE}'
                         ,${nuevaaatencion.FEC_REGISTRO}
                         ,${nuevaaatencion.NIVEL_ATENCION}
@@ -75,6 +75,10 @@ export class AtencionesController {
                         ,[N_CONTROL]
                         ,[TRATAMIENTO_ACTUAL]
                         ,[ID_PERSONA]
+                        ,[FECHA],
+                        APE_PAT_MED,
+                        APE_MAT_MED,
+                        APE_NOM_MED
                     FROM [risc_2030].[dbo].[ATENCIONES_REALIZADAS]
                     where  ID_PERSONA_PROFESIONAL=${id_persona}
                 `

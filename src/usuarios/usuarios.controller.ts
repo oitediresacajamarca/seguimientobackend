@@ -83,8 +83,14 @@ export class UsuariosController {
         const res = await this.usua.listar_usuarios()
         return res;
     }
+    @Post('listarporambito')
+    async listar_usuarios_ambito(@Body() ambito ) {
+        console.log(ambito)
+        const res = await this.usua.listar_usuarios_ambito(ambito.peso,ambito.peso_sup)
+        return res;
+    }
     @Get('eliminar/:id')
-    async eliminar_usuario(@Param() id: any) {
+        async eliminar_usuario(@Param() id: any) {
 
         console.log(id)
         const res = await this.usua.eliminar_usuario(id.id);
