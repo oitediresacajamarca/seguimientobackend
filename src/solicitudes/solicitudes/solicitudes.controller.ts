@@ -1,9 +1,12 @@
 import { Controller, Param, Get, Res, HttpStatus, Post, Body } from '@nestjs/common';
 const sql = require('mssql')
+const dotenv = require('dotenv');
+dotenv.config();
 
 @Controller('solicitudes')
 export class SolicitudesController {
-    urlconect = 'mssql://sa:.@localhost/risc_2030'
+    urlconect = process.env.url_database
+    
 
     @Get('/:cod_busqueda')
     async devolverSolicitudes(@Param() cod_busqueda) {
@@ -13,6 +16,7 @@ export class SolicitudesController {
         const consulta = `select * from SOLICITUDES_NOTIFICACION where cod_busqueda like '${cod_busqueda.cod_busqueda}%' ;
 `
         const result = await sql.query(consulta)
+        
      
         return result;
     }

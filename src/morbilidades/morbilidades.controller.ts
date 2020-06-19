@@ -2,7 +2,7 @@ import { Controller, Param, Get, Res, HttpStatus } from '@nestjs/common';
 var mssql = require('mssql')
 @Controller('morbilidades')
 export class MorbilidadesController {
-    cadena_conexion='mssql://sa:.@localhost/risc_2030'
+    cadena_conexion=process.env.url_database
 
     @Get('/:ID_PACIENTE')
     async devolver(@Param('ID_PACIENTE') ID_PACIENTE:string ,@Res() res) {

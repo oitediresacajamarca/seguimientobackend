@@ -1,7 +1,9 @@
-import { EntityRepository } from "typeorm";
+import { EntityRepository, Repository } from "typeorm";
+import { Atenciones } from "./atenciones.interface";
+import { AtencionesEntity } from "src/entidades/atenciones.entity";
 
-@EntityRepository()
-export class AtencionesRepositoy {
+@EntityRepository(AtencionesEntity)
+export class AtencionesRepositoy extends Repository<AtencionesEntity>{
 
 
 }

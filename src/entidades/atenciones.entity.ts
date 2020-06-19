@@ -31,3 +31,4 @@ export class AtencionesEntity {
     @Column({name:'CONSENTIMIENTO',nullable:true})
     CONSENTIMIENTO: number;
 }
+

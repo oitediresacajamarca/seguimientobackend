@@ -29,16 +29,12 @@ export class FuatController {
         console.log(body)
         const res = await this.fus.crearFuat(body);
         return res;
-
-
-
-
     }
 
 
 
     @Get('generarid')
-    async  generarId(@Res() respon): Promise<Fuat> {
+    async generarId(@Res() respon): Promise<Fuat> {
 
         const res = await this.fus.devuelveId();
         return respon.status(HttpStatus.OK).json({ respuesta: res })

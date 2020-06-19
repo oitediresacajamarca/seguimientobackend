@@ -1,18 +1,23 @@
 import { Controller, Post, Body, Param, Get } from '@nestjs/common';
+import { AtencionesService } from './atenciones.service';
 var mssql = require('mssql')
 var cadena_conexion = 'mssql://sa:.@localhost/risc_2030'
 
+const dotenv = require('dotenv');
+dotenv.config();
+cadena_conexion = process.env.url_database;
 
 @Controller('atenciones')
 export class AtencionesController {
+    constructor(private atenser: AtencionesService) {
+    }
 
     @Post('/registrar')
-    async  registrar(@Body() nuevaaatencion) {
+    async registrar(@Body() nuevaaatencion) {
         console.log(nuevaaatencion)
         mssql.close();
         let consulta = await mssql.connect(cadena_conexion)
         let insert = `
-
                 INSERT INTO [dbo].[ATENCION]
                         (
                         [ID_MODALIDAD]
@@ -59,12 +64,11 @@ export class AtencionesController {
 
 
     @Get('/atencionesrealizadas/:id_persona')
-    async  atenciones_realisadas(@Body() nuevaaatencion, @Param('id_persona') id_persona) {
+    async atenciones_realisadas(@Body() nuevaaatencion, @Param('id_persona') id_persona) {
         console.log(nuevaaatencion)
         mssql.close();
         await mssql.connect(cadena_conexion)
-        let insert = `
-                        SELECT [ANTECEDENTE]
+        let insert = ` SELECT [ANTECEDENTE]
                         ,[NOMBRES]
                         ,[APELLIDO_PAT]
                         ,[APELLIDO_MAT]
@@ -91,7 +95,7 @@ export class AtencionesController {
 
     }
     @Get('/atencionesrealizadas_detalle/:id_atencion')
-    async  atencionesrealizadas_detalle(@Body() nuevaaatencion, @Param('id_atencion') id_atencion) {
+    async atencionesrealizadas_detalle(@Body() nuevaaatencion, @Param('id_atencion') id_atencion) {
         console.log(nuevaaatencion)
         mssql.close();
         await mssql.connect(cadena_conexion)
@@ -113,6 +117,11 @@ export class AtencionesController {
 
         return result
 
+    }
+    @Get('/atencionesrealizadaspersona/:id_persona')
+    async atencionesRealizadasPersona(@Param() id_persona) {
+        const respuesta = await this.atenser.devolverAtencionesPersona(id_persona)
+        return respuesta
     }
 
 }

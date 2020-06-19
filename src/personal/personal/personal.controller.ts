@@ -1,22 +1,19 @@
 import { Controller, Get, Param, Res, HttpStatus } from '@nestjs/common';
-import { Console } from 'console';
 var mssql = require('mssql')
 
 @Controller('personal')
 export class PersonalController {
-    cadena_conexion='mssql://sa:.@localhost/risc_2030'
+    cadena_conexion = process.env.url_database
+   
     @Get(':id/:ipress')
     async devolverCodigoTrabajadorIpress(@Param('id') id, @Param('ipress') ipress, @Res() res) {
         let respuesta: any;
         let identiti
-
-
         mssql.close();
         await mssql.connect(this.cadena_conexion)
-
         const consulta = `SELECT *
         FROM [TRABAJADOR_IPRESS]
-        WHERE ID_PERSONA = ${id}  ; `
+        WHERE ID_PERSONA = ${id}; `
         console.log(consulta);
         const result = await mssql.query(consulta)
         console.log(result)
@@ -42,15 +39,10 @@ export class PersonalController {
 
                 const result = await mssql.query(consulta2)
                 respuesta = result.recordset[0];
-
-
-
-
             }
         }
         else {
             console.log("no encontro")
-
 
             const actualizacon = `insert into TRABAJADOR_IPRESS(ID_PERSONA,ID_IPRESS) values(${id},'${ipress}') ; `
 
@@ -61,9 +53,6 @@ export class PersonalController {
 
             const result = await mssql.query(consulta2)
             respuesta = result.recordset[0];
-
-
-
 
         }
 
