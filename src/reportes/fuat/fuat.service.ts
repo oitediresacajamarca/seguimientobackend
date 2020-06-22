@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Fuat } from '../fuat.interface';
 
+
 @Injectable()
 export class FuatService {
     constructor(@InjectModel('fuat') private mod: Model<Fuat>) { }
@@ -18,6 +19,11 @@ export class FuatService {
 
 
 
+        
+    }
+    async devolverFuat(cod_fuat){
+        const fuatn = await this.mod.findOne({numeroFuat:cod_fuat});
+        return fuatn;
     }
 
 }

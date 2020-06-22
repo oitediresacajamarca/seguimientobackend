@@ -1,5 +1,9 @@
 import { Controller, Post, Body, Param, Get } from '@nestjs/common';
 import { AtencionesService } from './atenciones.service';
+import { PersonaRepository } from 'src/repositorios/persona.repository';
+import { async } from 'rxjs/internal/scheduler/async';
+import { TrabajadorIpressRepository } from 'src/personal/trabajador-ipress.repository';
+import { DiagnosticoRepository } from './diagnostico.repository';
 var mssql = require('mssql')
 var cadena_conexion = 'mssql://sa:.@localhost/risc_2030'
 
@@ -9,7 +13,8 @@ cadena_conexion = process.env.url_database;
 
 @Controller('atenciones')
 export class AtencionesController {
-    constructor(private atenser: AtencionesService) {
+    constructor(private atenser: AtencionesService, private personas: PersonaRepository
+        ,private trabajadoripress:TrabajadorIpressRepository, private diagnosticos:DiagnosticoRepository) {
     }
 
     @Post('/registrar')
@@ -120,8 +125,38 @@ export class AtencionesController {
     }
     @Get('/atencionesrealizadaspersona/:id_persona')
     async atencionesRealizadasPersona(@Param() id_persona) {
-        const respuesta = await this.atenser.devolverAtencionesPersona(id_persona)
-        return respuesta
+        console.log(id_persona)
+        const respuesta = await this.atenser.devolverAtencionesPersona(id_persona.id_persona)
+        var atenciones = []
+        await Promise.all(
+            
+            respuesta.map(async element => {
+
+            let atencion: any = {}
+            Object.assign(atencion, element)
+        
+
+            const perosnaatendida = await this.personas.findOne({ ID_PERSONA: element.ID_PACIENTE })
+            const trabajadoripress = await this.trabajadoripress.findOne({ ID_TRABAJADOR_IPRESS: element.ID_RESPONSABLE })
+            const trabajadorpersona = await this.personas.findOne({ ID_PERSONA: trabajadoripress.ID_PERSONA })
+            const diagnosticos= await this.diagnosticos.find({ID_ATENCION:element.ID_ATENCION})
+
+            atencion.personaatendida = perosnaatendida;
+            atencion.trabajadoripress = trabajadoripress;
+            atencion.trabajadorpersona = trabajadorpersona;
+            atencion.diagnosticos= diagnosticos;
+
+            atenciones.push(atencion)
+
+
+
+        }));
+
+
+   
+        return atenciones;
+
+
     }
 
 }

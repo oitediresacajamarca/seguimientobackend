@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Res, Get, HttpStatus } from '@nestjs/common';
+import { Controller, Body, Post, Res, Get, HttpStatus, Param} from '@nestjs/common';
 import { FuatService } from './fuat.service';
 import { Fuat } from '../fuat.interface';
 
@@ -38,6 +38,12 @@ export class FuatController {
 
         const res = await this.fus.devuelveId();
         return respon.status(HttpStatus.OK).json({ respuesta: res })
+    }
+    @Get('devolverfuat/:cod_fuat')
+    async devolverfuat(@Param() cod_fuat){
+        console.log(cod_fuat)
+     const res=await this.fus.devolverFuat(cod_fuat.cod_fuat)  
+     return res
     }
 
 }
