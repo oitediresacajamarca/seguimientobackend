@@ -21,7 +21,7 @@ export class PersonaEntity {
     @Column()
     ID_DISTRITO: string;
     @Column()
-    FECHA_NAC: string;
+    FECHA_NAC: Date;
     @Column()
     TELEFONO: string;
     @Column()
