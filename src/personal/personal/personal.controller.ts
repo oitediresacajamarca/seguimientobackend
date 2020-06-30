@@ -14,10 +14,9 @@ export class PersonalController {
         const consulta = `SELECT *
         FROM [TRABAJADOR_IPRESS]
         WHERE ID_PERSONA = ${id}; `
-        console.log(consulta);
+      
         const result = await mssql.query(consulta)
-        console.log(result)
-        console.log('ddf')
+    
         if (result.recordset.length > 0) {
             let resulfi = result.recordset.filter(element =>
                 element.ID_IPRESS == ipress
