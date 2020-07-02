@@ -173,21 +173,15 @@ export class AtencionesController {
 
                 let atencion: any = {}
                 Object.assign(atencion, element)
-
-
                 const perosnaatendida = await this.personas.findOne({ ID_PERSONA: element.ID_PACIENTE })
                 const trabajadoripress = await this.trabajadoripress.findOne({ ID_TRABAJADOR_IPRESS: element.ID_RESPONSABLE })
                 const trabajadorpersona = await this.personas.findOne({ ID_PERSONA: trabajadoripress.ID_PERSONA })
                 const diagnosticos = await this.diagnosticos.find({ ID_ATENCION: element.ID_ATENCION })
-
                 atencion.personaatendida = perosnaatendida;
                 atencion.trabajadoripress = trabajadoripress;
                 atencion.trabajadorpersona = trabajadorpersona;
                 atencion.diagnosticos = diagnosticos;
-
                 atenciones.push(atencion)
-
-
 
             }));
 

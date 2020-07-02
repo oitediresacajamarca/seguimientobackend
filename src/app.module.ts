@@ -16,6 +16,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { PersonaModule } from './persona/persona.module';
 import { MedicamentoModule } from './medicamento/medicamento.module';
 import { TratamientoModule } from './tratamiento/tratamiento.module';
+import { IpressModule } from './ipress/ipress.module';
+import { RecetaController } from './impresiones/receta/receta.controller';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -32,8 +34,9 @@ import { TratamientoModule } from './tratamiento/tratamiento.module';
     AtencionesModule,
     PersonaModule,
     MedicamentoModule,
-    TratamientoModule],
-  controllers: [AppController],
+    TratamientoModule,
+    IpressModule],
+  controllers: [AppController, RecetaController],
   providers: [AppService],
 })
 export class AppModule { }
