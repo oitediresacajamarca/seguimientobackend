@@ -18,6 +18,7 @@ import { MedicamentoModule } from './medicamento/medicamento.module';
 import { TratamientoModule } from './tratamiento/tratamiento.module';
 import { IpressModule } from './ipress/ipress.module';
 import { RecetaController } from './impresiones/receta/receta.controller';
+import { DistribucionGeograficaModule } from './distribucion-geografica/distribucion-geografica.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -35,7 +36,8 @@ import { RecetaController } from './impresiones/receta/receta.controller';
     PersonaModule,
     MedicamentoModule,
     TratamientoModule,
-    IpressModule],
+    IpressModule,
+    DistribucionGeograficaModule],
   controllers: [AppController, RecetaController],
   providers: [AppService],
 })
