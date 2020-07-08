@@ -23,7 +23,7 @@ export class AtencionesService {
 
     }
     async devolverAtencionesFiltrar(desde: Date, hasta: Date): Promise<any> {
-        console.log(desde)
+        hasta.setDate(hasta.getDate() + 1);
 
         const respuesta = await getRepository(AtencionesEntity).find({ where: { FECHA: Between(desde,hasta),ID_PACIENTE:Not(IsNull() )} })
         console.log(respuesta)

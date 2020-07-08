@@ -19,6 +19,11 @@ import { TratamientoModule } from './tratamiento/tratamiento.module';
 import { IpressModule } from './ipress/ipress.module';
 import { RecetaController } from './impresiones/receta/receta.controller';
 import { DistribucionGeograficaModule } from './distribucion-geografica/distribucion-geografica.module';
+import { AtencionRegModule } from './atencion-reg/atencion-reg.module';
+import { SolicitudesAtencionModule } from './solicitudes-atencion/solicitudes-atencion.module';
+import { PersonaDescripcionModule } from './persona-descripcion/persona-descripcion.module';
+import { PacienteModule } from './paciente/paciente.module';
+import { HistoriaClinicaModule } from './historia-clinica/historia-clinica.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -37,7 +42,12 @@ import { DistribucionGeograficaModule } from './distribucion-geografica/distribu
     MedicamentoModule,
     TratamientoModule,
     IpressModule,
-    DistribucionGeograficaModule],
+    DistribucionGeograficaModule,
+    AtencionRegModule,
+    SolicitudesAtencionModule,
+    PersonaDescripcionModule,
+    PacienteModule,
+    HistoriaClinicaModule],
   controllers: [AppController, RecetaController],
   providers: [AppService],
 })

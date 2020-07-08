@@ -7,8 +7,7 @@ export class PersonaController {
 
     }
     @Get(':NRO_DOCUMENTO')
-    async getOne(@Param() NRO_DOCUMENTO: string) {
-        console.log(NRO_DOCUMENTO)
+    async getOne(@Param() NRO_DOCUMENTO: string) {      
         const uno = await this.personaser.devolverOne(NRO_DOCUMENTO);
         return uno;
     }
