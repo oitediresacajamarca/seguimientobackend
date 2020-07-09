@@ -28,7 +28,6 @@ export class FuatController {
     @Post('guardar')
     async guardar(@Body() body) {
         console.log('se guardara la sigueite fuat linea 30 fuatcontroller')
-
         console.log(body)
         const res = await this.fus.crearFuat(body);
         return res;

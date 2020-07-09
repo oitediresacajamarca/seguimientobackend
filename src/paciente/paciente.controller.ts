@@ -9,6 +9,7 @@ export class PacienteController {
     }
     @Post('prepara/:id_persona')
     async preparaPaciente(@Param() id_persona, @Body() body) {
+        console.log(body)
         const resp = await this.pacienteserv.preparaPaciente(id_persona.id_persona,  body.COD_IPRESS,body.NRO_DOCUMENTO);
         return resp;
     }

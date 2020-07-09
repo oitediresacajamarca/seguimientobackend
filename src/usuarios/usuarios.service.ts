@@ -49,16 +49,30 @@ export class UsuariosService {
         const respuesta = await this.mod.find();
         return respuesta;
     }
-    async listar_usuarios_ambito(peso:number,peso_sup:number) {
-        const respuesta = await this.mod.find({"ambitos.peso":{"$gte":peso},"ambitos.peso_sup":{"$lte":peso_sup}});
+    async listar_usuarios_ambito(peso: number, peso_sup: number) {
+        const respuesta = await this.mod.find({ "ambitos.peso": { "$gte": peso }, "ambitos.peso_sup": { "$lte": peso_sup } });
         return respuesta;
     }
+    async listar_usuarios_ambito_filtro(peso: number, peso_sup: number, filtros) {
+        const respuesta = await this.mod.find({
+            $and: [
+                { "ambitos.peso": { "$gte": peso } }, { "ambitos.peso_sup": { "$lte": peso_sup } },
+                {
+                    $or: [{ "numero_doc": filtros }, { "username": filtros },
+                    { "NOMBRES":{$regex:filtros+''}  }, { "APELLIDO_MAT": {$regex:filtros+''} },
+                    { "APELLIDO_PAT": {$regex:filtros+''} }]
+                }]
+
+        });
+        return respuesta;
+    }
+
     async eliminar_usuario(id: string) {
         const respuesta = await this.mod.findByIdAndDelete(id);
         return respuesta;
     }
     async actualizar_usuario(id: number, datos) {
-        const usuario = await this.mod.updateMany({ "id_persona": id }, { "clave": datos.newpassword,"estado":datos.estado })
+        const usuario = await this.mod.updateMany({ "id_persona": id }, { "clave": datos.newpassword, "estado": datos.estado })
 
         console.log(datos)
         return usuario;

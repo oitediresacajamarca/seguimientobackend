@@ -24,6 +24,7 @@ import { SolicitudesAtencionModule } from './solicitudes-atencion/solicitudes-at
 import { PersonaDescripcionModule } from './persona-descripcion/persona-descripcion.module';
 import { PacienteModule } from './paciente/paciente.module';
 import { HistoriaClinicaModule } from './historia-clinica/historia-clinica.module';
+import { AtencionDiagnosticoModule } from './atencion-diagnostico/atencion-diagnostico.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -47,7 +48,8 @@ import { HistoriaClinicaModule } from './historia-clinica/historia-clinica.modul
     SolicitudesAtencionModule,
     PersonaDescripcionModule,
     PacienteModule,
-    HistoriaClinicaModule],
+    HistoriaClinicaModule,
+    AtencionDiagnosticoModule],
   controllers: [AppController, RecetaController],
   providers: [AppService],
 })

@@ -31,10 +31,6 @@ export class UsuariosController {
     @Post('/verifica')
     async verifica(@Body() body: any, @Res() res) {
 
-
-
-
-
         let mires: any = {};
 
         let re: any = await this.usua.verificarusario(body.username)
@@ -105,6 +101,13 @@ export class UsuariosController {
     @Put('actualizarP/:id_persona')
     async actualizarUsuario(@Param('id_persona') id_persona: number, @Body() body) {
         const res = await this.usua.actualizar_usuario(id_persona,body)
+        return res;
+
+    }
+    @Post('listarambitofiltro/')
+    async listarUsuariosAmbitosFiltrar(@Param('id_persona') id_persona: number, @Body() body) {
+        console.log (body)
+        const res = await this.usua.listar_usuarios_ambito_filtro(body.peso,body.peso_sup,body.filtros)
         return res;
 
     }
