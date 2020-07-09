@@ -39,7 +39,6 @@ export class UsuariosService {
     }
     async nuevo(nuevo: any): Promise<Usuarios> {
 
-        console.log(nuevo);
         const pr = await this.mod.create(nuevo);
 
         return pr;
@@ -59,8 +58,8 @@ export class UsuariosService {
                 { "ambitos.peso": { "$gte": peso } }, { "ambitos.peso_sup": { "$lte": peso_sup } },
                 {
                     $or: [{ "numero_doc": filtros }, { "username": filtros },
-                    { "NOMBRES":{$regex:filtros+''}  }, { "APELLIDO_MAT": {$regex:filtros+''} },
-                    { "APELLIDO_PAT": {$regex:filtros+''} }]
+                    { "NOMBRES": { $regex: filtros + '' } }, { "APELLIDO_MAT": { $regex: filtros + '' } },
+                    { "APELLIDO_PAT": { $regex: filtros + '' } }]
                 }]
 
         });
@@ -74,7 +73,7 @@ export class UsuariosService {
     async actualizar_usuario(id: number, datos) {
         const usuario = await this.mod.updateMany({ "id_persona": id }, { "clave": datos.newpassword, "estado": datos.estado })
 
-        console.log(datos)
+
         return usuario;
     }
 

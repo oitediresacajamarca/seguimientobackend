@@ -9,7 +9,7 @@ export class AtencionRegController {
     }
     @Post('guardar')
     async guardar(@Body() Body) {
-        console.log(Body)
+     
         const respuesta = await this.atencionregser.guardarAtencionRegRep(Body);
         return respuesta
     }

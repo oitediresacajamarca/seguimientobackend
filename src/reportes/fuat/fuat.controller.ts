@@ -17,7 +17,7 @@ export class FuatController {
     @Post('ver')
     verFuat(@Body() Body, @Res() res) {
 
-        console.log('inicio entrega de reporte')
+    
         client.render({
             template: { shortid:"Hkln5SQ3iL" }, data: Body
 
@@ -27,8 +27,7 @@ export class FuatController {
     }
     @Post('guardar')
     async guardar(@Body() body) {
-        console.log('se guardara la sigueite fuat linea 30 fuatcontroller')
-        console.log(body)
+    
         const res = await this.fus.crearFuat(body);
         return res;
     }

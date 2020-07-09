@@ -29,4 +29,6 @@ export class PersonaDescripcionEntity {
     ID_DISTRITO: string;
     @Column()
     GENERO: string
+    @Column()
+    DIRECCION:string
 }

@@ -16,13 +16,14 @@ export class PersonaService {
     const personas=  await  this.personrep.find({ where: "NOMBRES LIKE '%"+nombres+"%' AND APELLIDO_PAT LIKE '%"+apellido_pat+"%' and APELLIDO_MAT LIKE '%"+apellido_mat+"%'" })
     return personas
     }
-    async actualizaDatosPersonales(numerodoc:string,nombres: string, apellido_pat: string, apellido_mat: string) {
+    async actualizaDatosPersonales(numerodoc:string,nombres: string, apellido_pat: string, apellido_mat: string,DIRECCION:string) {
         const personas=  await  this.personrep.find({NRO_DOCUMENTO:numerodoc})
         console.log(personas)
         personas.forEach(element => {
            element.NOMBRES=nombres;
            element.APELLIDO_PAT=apellido_pat;
            element.APELLIDO_MAT=apellido_mat;
+           element.DIRECCION=DIRECCION;
         
             this.personrep.save(element)
         });

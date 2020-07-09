@@ -27,7 +27,10 @@ export class PersonaEntity {
     @Column()
     CORREO: string;
     @Column()
-    IMAGEN_PERSONA: string
+    IMAGEN_PERSONA: string;
+    @Column()
+    DIRECCION:string
+
 
 
 }

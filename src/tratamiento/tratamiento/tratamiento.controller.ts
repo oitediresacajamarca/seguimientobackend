@@ -8,7 +8,7 @@ export class TratamientoController {
     }
     @Post('guardar')
     async guardar(@Body() body) {
-        console.log(body)
+      
         const respuesta = await this.tratamientoser.guardarTratamiento(body)
         return respuesta
     }

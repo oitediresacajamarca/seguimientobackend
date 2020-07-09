@@ -22,7 +22,7 @@ export class UsuariosController {
     async loging(@Body() login: LoginDto, @Res() res) {
 
 
-        console.log(login)
+
         let re: any = await this.usua.loguearyambito(login.root.username, login.root.clave, login.root.peso)
 
         return res.status(HttpStatus.OK).json({ bien: "bien", respuesta: re })
@@ -60,7 +60,7 @@ export class UsuariosController {
         else {
             mires.mensaje = "Existe"
         }
-        console.log(body)
+ 
 
         return res.status(HttpStatus.OK).json({ mensaje: mires.mensaje, respuesta: re })
 
@@ -70,7 +70,7 @@ export class UsuariosController {
     async genrarFake(@Res() res) {
 
         var randomName = ngfaker.name.firstName()
-        console.log(randomName);
+    
         return res.status(HttpStatus.OK).json(randomName);
 
     }
@@ -81,14 +81,14 @@ export class UsuariosController {
     }
     @Post('listarporambito')
     async listar_usuarios_ambito(@Body() ambito ) {
-        console.log(ambito)
+      
         const res = await this.usua.listar_usuarios_ambito(ambito.peso,ambito.peso_sup)
         return res;
     }
     @Get('eliminar/:id')
         async eliminar_usuario(@Param() id: any) {
 
-        console.log(id)
+    
         const res = await this.usua.eliminar_usuario(id.id);
         return res;
 
@@ -106,7 +106,7 @@ export class UsuariosController {
     }
     @Post('listarambitofiltro/')
     async listarUsuariosAmbitosFiltrar(@Param('id_persona') id_persona: number, @Body() body) {
-        console.log (body)
+ 
         const res = await this.usua.listar_usuarios_ambito_filtro(body.peso,body.peso_sup,body.filtros)
         return res;
 

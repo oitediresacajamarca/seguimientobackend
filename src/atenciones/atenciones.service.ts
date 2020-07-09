@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AtencionesRepositoy } from './atenciones.repositoy';
 import { PersonaRepository } from 'src/repositorios/persona.repository';
 import console = require('console');
-import { MoreThan, getRepository, LessThan,Not, IsNull ,MoreThanOrEqual,LessThanOrEqual, Between} from 'typeorm'
+import { MoreThan, getRepository, LessThan, Not, IsNull, MoreThanOrEqual, LessThanOrEqual, Between } from 'typeorm'
 import { AtencionesEntity } from 'src/entidades/atenciones.entity';
 import { Console } from 'console';
 
@@ -24,8 +24,9 @@ export class AtencionesService {
     }
     async devolverAtencionesFiltrar(desde: Date, hasta: Date): Promise<any> {
         hasta.setDate(hasta.getDate() + 1);
+        desde.setDate(desde.getDate() + 1)
 
-        const respuesta = await getRepository(AtencionesEntity).find({ where: { FECHA: Between(desde,hasta),ID_PACIENTE:Not(IsNull() )} })
+        const respuesta = await getRepository(AtencionesEntity).find({ where: { FECHA: Between(desde, hasta), ID_PACIENTE: Not(IsNull()) } })
         console.log(respuesta)
         return respuesta
 

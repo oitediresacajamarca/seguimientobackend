@@ -50,8 +50,7 @@ export class SolicitudesController {
         sql.close()
 
         await sql.connect(this.urlconect)
-        console.log(cod_busqueda)
-        console.log(Body)
+   
 
         const consulta = `update [SOLICITUD_PACIENTE] 
     set [ID_IPRESS]='${Body.ID_IPRESS}', [DESCRIPCION]='${Body.DESCRIPCION}' where ID_SOLICITUD =${cod_busqueda.id_solicitud} ;
