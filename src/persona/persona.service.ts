@@ -18,7 +18,7 @@ export class PersonaService {
     }
     async actualizaDatosPersonales(numerodoc:string,nombres: string, apellido_pat: string, apellido_mat: string,DIRECCION:string) {
         const personas=  await  this.personrep.find({NRO_DOCUMENTO:numerodoc})
-        console.log(personas)
+        
         personas.forEach(element => {
            element.NOMBRES=nombres;
            element.APELLIDO_PAT=apellido_pat;

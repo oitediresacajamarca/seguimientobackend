@@ -26,7 +26,7 @@ export class PersonalController {
                 respuesta = resulfi[0]
             }
             else {
-                console.log("no encontro")
+            
 
 
                 const actualizacon = `insert into TRABAJADOR_IPRESS(ID_PERSONA,ID_IPRESS) values(${id},'${ipress}') ; `
@@ -41,7 +41,7 @@ export class PersonalController {
             }
         }
         else {
-            console.log("no encontro")
+         
 
             const actualizacon = `insert into TRABAJADOR_IPRESS(ID_PERSONA,ID_IPRESS) values(${id},'${ipress}') ; `
 

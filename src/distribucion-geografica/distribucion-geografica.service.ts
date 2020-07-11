@@ -12,7 +12,7 @@ export class DistribucionGeograficaService {
     }
 
     async getDistrito(ID_DISTRITO: any) {
-        console.log(ID_DISTRITO)
+
         const dat = await this.distr.findOne({ where: { ID_DISTRITO: Like(ID_DISTRITO.cod_distrito+'%') } })
 
         return dat;

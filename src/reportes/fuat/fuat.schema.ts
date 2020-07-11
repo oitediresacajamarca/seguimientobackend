@@ -11,7 +11,6 @@ var Diagnostico=new Schema({
     tipo_diag:String,
     valor_lab:String,
     desc_diag:String
-
 });
 
 

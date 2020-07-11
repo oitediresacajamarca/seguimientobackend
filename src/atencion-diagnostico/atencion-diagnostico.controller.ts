@@ -6,7 +6,7 @@ export class AtencionDiagnosticoController {
     constructor(private ates: AtencionDiagnosticoService) { }
     @Post('guardardiagnosticos')
     async guardarDiagnosticos(@Body() body) {
-        console.log(body)
+      
         const resp = await this.ates.guardarDiagnosticos(body)
         return resp;
     }

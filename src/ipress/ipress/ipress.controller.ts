@@ -9,7 +9,7 @@ export class IpressController {
     }
     @Get(':cod_ipress')
     async devolverIpress(@Param() cod_ipres) {
-        console.log(cod_ipres)
+      
         const resp = await this.ipress.devolverIpress(cod_ipres.cod_ipress);
         return resp;
     }

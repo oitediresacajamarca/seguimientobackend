@@ -12,11 +12,11 @@ export class DistribucionAdministrativaController {
   sql.close();
 
         await sql.connect(this.urlconect)
-        console.log(cod_ipress)
+       
 
         const consulta=`select * from DISTRIBUCION_IPRESS where CODIGO_RENIPRESS like '${cod_ipress.cod_ipress}%' ;  `
             const result = await sql.query(consulta) 
-            console.log(`select * from DISTRIBUCION_IPRESS where CODIGO_RENIPRESS like '${cod_ipress.cod_ipress}%'`)
+         
             return result;
     }
 }

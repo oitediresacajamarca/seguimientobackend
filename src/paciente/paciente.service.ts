@@ -20,7 +20,7 @@ export class PacienteService {
             paciente = await this.pacienterep.save(paciente)
 
         } else {
-            console.log('existe el paciente')
+         
 
         }
 
@@ -43,7 +43,7 @@ export class PacienteService {
             hccreada = await this.hc.save(hccreada)
         }
         else {
-            console.log('existe historia clinica')
+    
 
         }
 

@@ -13,7 +13,7 @@ export class MedicamentoController {
     }
     @Post('filtrar')
     filtra(@Body() body) {
-        console.log(body);
+ 
         const resp = this.medics.filtrarMedicamentos(body)
         return resp;
     }

@@ -27,7 +27,7 @@ export class AtencionesService {
         desde.setDate(desde.getDate() + 1)
 
         const respuesta = await getRepository(AtencionesEntity).find({ where: { FECHA: Between(desde, hasta), ID_PACIENTE: Not(IsNull()) } })
-        console.log(respuesta)
+      
         return respuesta
 
 

@@ -20,7 +20,7 @@ export class PersonaController {
     }
     @Post('actualiza/:NRO_DOCUMENTO')
     async actualizaPersona(@Body() body,@Param() NRO_DOCUMENTO){  
-        console.log(body)
+      
         const uno = await this.personaser.actualizaDatosPersonales(NRO_DOCUMENTO.NRO_DOCUMENTO,body.NOMBRES,body.APELLIDO_PAT,body.APELLIDO_MAT,body.DIRECCION);
         return uno;
     }

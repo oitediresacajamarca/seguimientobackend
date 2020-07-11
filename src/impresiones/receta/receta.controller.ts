@@ -9,7 +9,7 @@ export class RecetaController {
     @Post('ver')
     verFuat(@Body() Body, @Res() res) {
 
-        console.log(Body)
+     
         client.render({
             template: { shortid: "Skx6N2hiAL" }, data: Body
 

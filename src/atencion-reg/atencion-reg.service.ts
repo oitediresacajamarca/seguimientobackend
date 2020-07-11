@@ -13,8 +13,7 @@ export class AtencionRegService {
     atenrep.HORA = new Date(1970, 1, 1, hora[0], hora[1], hora[2])
    atencionesreg.push(atenrep);
     atencionesreg.forEach(async (element, index) => {
-      console.log(index)
-      console.log(element)
+
       element.NRO_ITEM = index + 1
       await this.atencionregrep.save(element);
     });

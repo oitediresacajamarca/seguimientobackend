@@ -20,7 +20,7 @@ export class AtencionesController {
 
     @Post('/registrar')
     async registrar(@Body() nuevaaatencion) {
-        console.log(nuevaaatencion)
+     
         if (nuevaaatencion.ID_SOLICITUD == undefined) {
             nuevaaatencion.ID_SOLICITUD = null;
         }
@@ -56,7 +56,7 @@ export class AtencionesController {
                         ,${nuevaaatencion.ID_PACIENTE}
                         ,${nuevaaatencion.ID_SOLICITUD})
                 `
-        console.log(insert)
+        
 
         const result = await mssql.query(insert)
         let identiti
@@ -74,7 +74,7 @@ export class AtencionesController {
 
     @Get('/atencionesrealizadas/:id_persona')
     async atenciones_realisadas(@Body() nuevaaatencion, @Param('id_persona') id_persona) {
-        console.log(nuevaaatencion)
+     
         mssql.close();
         await mssql.connect(cadena_conexion)
         let insert = ` SELECT [ANTECEDENTE]
@@ -98,14 +98,14 @@ export class AtencionesController {
 
         const result = await mssql.query(insert)
 
-        console.log(insert)
+     
 
         return result
 
     }
     @Get('/atencionesrealizadas_detalle/:id_atencion')
     async atencionesrealizadas_detalle(@Body() nuevaaatencion, @Param('id_atencion') id_atencion) {
-        console.log(nuevaaatencion)
+ 
         mssql.close();
         await mssql.connect(cadena_conexion)
         let insert = `
@@ -122,7 +122,6 @@ export class AtencionesController {
 
         const result = await mssql.query(insert)
 
-        console.log(insert)
 
         return result
 
