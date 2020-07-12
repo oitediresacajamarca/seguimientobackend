@@ -1,5 +1,6 @@
-import { Controller, Post, Body, Res } from '@nestjs/common';
+import { Controller, Post, Body, Res, Param, Get } from '@nestjs/common';
 import { RecetaService } from './receta.service';
+import { RelationCountAttribute } from 'typeorm/query-builder/relation-count/RelationCountAttribute';
 var ipreportes = '172.18.20.30'
 const client = require("jsreport-client")("http://" + ipreportes + ":8001/api/report")
 
@@ -27,5 +28,19 @@ export class RecetaController {
     async crearReceta(@Body() body) {
         const resp = await this.recetas.crearReceta(body)
         return resp;
+    }
+    @Get('ver/:ID_ATENCION')
+    async ver(@Param() ID_ATENCION: number, @Res() res) {
+        console.log(ID_ATENCION);
+        const resp = await this.recetas.devolverJsonReceta(ID_ATENCION)
+        this.pdfReceta(resp).pipe(res);
+        return resp;
+    }
+
+    pdfReceta(data) {
+        return client.render({
+            template: { shortid: "Skx6N2hiAL" }, data: data
+
+        })
     }
 }

@@ -4,7 +4,8 @@ import { TratamientoRepository } from '../tratamiento.repository';
 @Injectable()
 export class TratamientoService {
     constructor(private tratamientorep: TratamientoRepository) { }
-    guardarTratamiento(any) {
-        this.tratamientorep.save(any);
+    async guardarTratamiento(any) {
+    const resp=await    this.tratamientorep.save(any);
+    return resp;
     }
 }

@@ -10,4 +10,9 @@ export class RecetaService {
         const res = await this.mod.create(receta);
         return res;
     }
+    async devolverJsonReceta(ID_ATENCION:number){
+        const res = await this.mod.find({ID_ATENCION:ID_ATENCION});
+        return res;
+    }
+
 }
