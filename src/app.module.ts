@@ -26,6 +26,7 @@ import { PacienteModule } from './paciente/paciente.module';
 import { HistoriaClinicaModule } from './historia-clinica/historia-clinica.module';
 import { AtencionDiagnosticoModule } from './atencion-diagnostico/atencion-diagnostico.module';
 import { LogsModule } from './logs/logs.module';
+import { ImpresionesModule } from './impresiones/impresiones.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -51,8 +52,9 @@ import { LogsModule } from './logs/logs.module';
     PacienteModule,
     HistoriaClinicaModule,
     AtencionDiagnosticoModule,
-    LogsModule],
-  controllers: [AppController, RecetaController],
+    LogsModule,
+    ImpresionesModule],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule { }
