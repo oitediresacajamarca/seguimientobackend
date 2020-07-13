@@ -11,7 +11,7 @@ export class RecetaService {
         return res;
     }
     async devolverJsonReceta(ID_ATENCION:number){
-        const res = await this.mod.find({ID_ATENCION:ID_ATENCION});
+        const res = await this.mod.findOne({ID_ATENCION:ID_ATENCION});
         return res;
     }
 

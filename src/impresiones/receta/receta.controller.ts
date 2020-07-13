@@ -30,17 +30,24 @@ export class RecetaController {
         return resp;
     }
     @Get('ver/:ID_ATENCION')
-    async ver(@Param() ID_ATENCION: number, @Res() res) {
-        console.log(ID_ATENCION);
-        const resp = await this.recetas.devolverJsonReceta(ID_ATENCION)
-        this.pdfReceta(resp).pipe(res);
-        return resp;
+    async ver(@Param() ID_ATENCION, @Res() res) {
+        
+        const resp = await this.recetas.devolverJsonReceta(ID_ATENCION.ID_ATENCION)
+     
+        client.render({
+            template: { shortid: "Skx6N2hiAL" }, data: {receta:resp}
+
+        }).then((response) => {
+           response.pipe(res)
+        })
+    
     }
 
-    pdfReceta(data) {
-        return client.render({
+    async pdfReceta(data) {
+       const render= await client.render({
             template: { shortid: "Skx6N2hiAL" }, data: data
 
         })
+     
     }
 }
