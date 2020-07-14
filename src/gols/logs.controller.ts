@@ -19,4 +19,9 @@ export class LogsController {
         const resp = await this.logs.vertodoslogs()
         return resp;
     }
+    @Get('verlogserror')
+    async vererror() {
+        const resp = await this.logs.verlogserror('errores en guardar atencion diagnosticos')
+        return resp;
+    }
 }
