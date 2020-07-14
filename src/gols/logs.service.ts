@@ -36,9 +36,11 @@ export class LogsService {
     async vertodoslogs() {
         const resp = await this.logmod.find()
         let respf = resp.map((lo) => {
-
-            let dto: any = lo;
+            let dto: any = {}
+            dto.user = lo.user
+            dto.accion = lo.accion
             dto.fechaperu = lo.fecha.toLocaleString('es-PE')
+            dto.payload = JSON.parse(lo.payload)
 
             return dto
 
@@ -58,5 +60,6 @@ export class LogsService {
             return dto
 
         })
+        return respf;
     }
 }
