@@ -49,13 +49,14 @@ export class LogsService {
     async verlogserror(error    ) {
         const resp = await this.logmod.find({accion:'errores en guardar atencion diagnosticos'})
         let respf = resp.map((lo) => {
-
-            let dto: any = lo;
+            let dto: any = {}
+            dto.user = lo.user
+            dto.accion = lo.accion
             dto.fechaperu = lo.fecha.toLocaleString('es-PE')
+            dto.payload = JSON.parse(lo.payload)
 
             return dto
 
         })
-        return respf;
     }
 }
