@@ -25,7 +25,7 @@ import { PersonaDescripcionModule } from './persona-descripcion/persona-descripc
 import { PacienteModule } from './paciente/paciente.module';
 import { HistoriaClinicaModule } from './historia-clinica/historia-clinica.module';
 import { AtencionDiagnosticoModule } from './atencion-diagnostico/atencion-diagnostico.module';
-import { LogsModule } from './logs/logs.module';
+import { LogsModule } from './gols/logs.module';
 import { ImpresionesModule } from './impresiones/impresiones.module';
 
 @Module({
