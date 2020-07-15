@@ -28,6 +28,9 @@ import { AtencionDiagnosticoModule } from './atencion-diagnostico/atencion-diagn
 import { LogsModule } from './gols/logs.module';
 import { ImpresionesModule } from './impresiones/impresiones.module';
 
+import { ExamenesFisicosAtencionModule } from './examenes-fisicos-atencion/examenes-fisicos-atencion.module';
+import { AtencionDetalleModule } from './atencion-detalle/atencion-detalle.module';
+
 @Module({
   imports: [ServeStaticModule.forRoot({
     rootPath: join(__dirname, '/', 'seguimientopacientespersonal'),
@@ -53,7 +56,9 @@ import { ImpresionesModule } from './impresiones/impresiones.module';
     HistoriaClinicaModule,
     AtencionDiagnosticoModule,
     LogsModule,
-    ImpresionesModule],
+    ImpresionesModule,
+    ExamenesFisicosAtencionModule,
+    AtencionDetalleModule],
   controllers: [AppController],
   providers: [AppService],
 })

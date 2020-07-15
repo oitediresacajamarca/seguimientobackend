@@ -46,5 +46,12 @@ export class FuatController {
      const res=await this.fus.devolverFuat(cod_fuat.cod_fuat)  
      return res
     }
+    @Get('fuatJsonBase/:ID_ATENCION')
+    async devolverDatosJsonFuatBase(@Param() ID_ATENCION){
+       
+        const res=await this.fus.devolverFuat(ID_ATENCION.ID_ATENCION)  
+        return res
+       }
+
 
 }

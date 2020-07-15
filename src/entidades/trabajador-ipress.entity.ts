@@ -18,6 +18,8 @@ export class TrabajadorIpressEntity {
     FEC_INGRESO:string;
         @Column()
     ESTADO:true;
+    @Column()
+    NUM_COLEG:string
 
 
 }
