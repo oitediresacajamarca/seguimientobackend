@@ -5,6 +5,8 @@ import { async } from 'rxjs/internal/scheduler/async';
 import { TrabajadorIpressRepository } from 'src/personal/trabajador-ipress.repository';
 import { DiagnosticoRepository } from './diagnostico.repository';
 import console = require('console');
+import { Console } from 'console';
+import { SolicitudesAtencionRepository } from 'src/solicitudes-atencion/solicitudes-atencion.repository';
 var mssql = require('mssql')
 var cadena_conexion = 'mssql://sa:.@localhost/risc_2030'
 
@@ -15,12 +17,12 @@ cadena_conexion = process.env.url_database;
 @Controller('atenciones')
 export class AtencionesController {
     constructor(private atenser: AtencionesService, private personas: PersonaRepository
-        , private trabajadoripress: TrabajadorIpressRepository, private diagnosticos: DiagnosticoRepository) {
+        , private trabajadoripress: TrabajadorIpressRepository, private diagnosticos: DiagnosticoRepository, private solicit: SolicitudesAtencionRepository) {
     }
 
     @Post('/registrar')
     async registrar(@Body() nuevaaatencion) {
-     
+
         if (nuevaaatencion.ID_SOLICITUD == undefined) {
             nuevaaatencion.ID_SOLICITUD = null;
         }
@@ -56,7 +58,7 @@ export class AtencionesController {
                         ,${nuevaaatencion.ID_PACIENTE}
                         ,${nuevaaatencion.ID_SOLICITUD})
                 `
-        
+
 
         const result = await mssql.query(insert)
         let identiti
@@ -74,7 +76,7 @@ export class AtencionesController {
 
     @Get('/atencionesrealizadas/:id_persona')
     async atenciones_realisadas(@Body() nuevaaatencion, @Param('id_persona') id_persona) {
-     
+
         mssql.close();
         await mssql.connect(cadena_conexion)
         let insert = ` SELECT [ANTECEDENTE]
@@ -98,14 +100,14 @@ export class AtencionesController {
 
         const result = await mssql.query(insert)
 
-     
+
 
         return result
 
     }
     @Get('/atencionesrealizadas_detalle/:id_atencion')
     async atencionesrealizadas_detalle(@Body() nuevaaatencion, @Param('id_atencion') id_atencion) {
- 
+
         mssql.close();
         await mssql.connect(cadena_conexion)
         let insert = `
@@ -163,7 +165,47 @@ export class AtencionesController {
     @Post('atencionesRealizadasFiltros')
     async atencionesrealizadasFiltros(@Body() body) {
 
-        const RESP = await this.atenser.devolverAtencionesFiltrar(new Date(body.DESDE), new Date(body.HASTA))
+
+        const RESP = await this.atenser.devolverAtencionesFiltrar(new Date(body.DESDE), new Date(body.HASTA), body.COD_IPRESS)
+
+        var atenciones = []
+        await Promise.all(
+
+            RESP.map(async element => {
+
+                let atencion: any = {}
+                Object.assign(atencion, element)
+                const perosnaatendida = await this.personas.findOne({ ID_PERSONA: element.ID_PACIENTE })
+           
+                if (perosnaatendida.TELEFONO == null) {
+                 const solicitud=   await this.solicit.findOne({ ID_PACIENTE: perosnaatendida.ID_PERSONA })
+                 console.log(solicitud)
+                 if(solicitud!=undefined){
+                 perosnaatendida.TELEFONO = solicitud.TELEF_CONTACTO
+                 }
+                }
+                const trabajadoripress = await this.trabajadoripress.findOne({ ID_TRABAJADOR_IPRESS: element.ID_RESPONSABLE })
+                const trabajadorpersona = await this.personas.findOne({ ID_PERSONA: trabajadoripress.ID_PERSONA })
+                const diagnosticos = await this.diagnosticos.find({ ID_ATENCION: element.ID_ATENCION })
+                atencion.personaatendida = perosnaatendida;
+                atencion.trabajadoripress = trabajadoripress;
+                atencion.trabajadorpersona = trabajadorpersona;
+                atencion.diagnosticos = diagnosticos;
+                atenciones.push(atencion)
+
+            }));
+
+        return atenciones
+
+
+    }
+
+
+    @Post('atencionesRealizadasFiltrosFechas')
+    async atencionesrealizadasFiltrosFechas(@Body() body) {
+
+
+        const RESP = await this.atenser.devolverAtencionesFiltrarFechas(new Date(body.DESDE), new Date(body.HASTA))
 
         var atenciones = []
         await Promise.all(
