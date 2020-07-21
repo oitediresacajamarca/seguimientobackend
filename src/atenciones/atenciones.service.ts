@@ -37,7 +37,7 @@ export class AtencionesService {
     async devolverAtencionesFiltrar(desde: Date, hasta: Date, ipress: string): Promise<any> {
         hasta.setDate(hasta.getDate() + 1);
         desde.setDate(desde.getDate() + 1)
-        console.log(ipress)
+    
 
         const respuesta = await getRepository(AtencionesEntity).find({
             where: {

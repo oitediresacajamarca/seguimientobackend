@@ -175,14 +175,14 @@ export class AtencionesController {
 
                 let atencion: any = {}
                 Object.assign(atencion, element)
-                const perosnaatendida = await this.personas.findOne({ ID_PERSONA: element.ID_PACIENTE })
-           
+                let perosnaatendida = await this.personas.findOne({ ID_PERSONA: element.ID_PACIENTE })
+                             
                 if (perosnaatendida.TELEFONO == null) {
-                 const solicitud=   await this.solicit.findOne({ ID_PACIENTE: perosnaatendida.ID_PERSONA })
-                 console.log(solicitud)
-                 if(solicitud!=undefined){
-                 perosnaatendida.TELEFONO = solicitud.TELEF_CONTACTO
-                 }
+                    const solicitud = await this.solicit.findOne({ ID_PACIENTE: perosnaatendida.ID_PERSONA })
+                  
+                    if (solicitud != undefined) {
+                        perosnaatendida.TELEFONO = solicitud.TELEF_CONTACTO
+                    }
                 }
                 const trabajadoripress = await this.trabajadoripress.findOne({ ID_TRABAJADOR_IPRESS: element.ID_RESPONSABLE })
                 const trabajadorpersona = await this.personas.findOne({ ID_PERSONA: trabajadoripress.ID_PERSONA })
