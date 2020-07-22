@@ -27,7 +27,6 @@ export class PersonaController {
 
     @Get('persona-descripcion/:NRO_DOCUMENTO')
     async getPersonaDescripcion(@Param() NRO_DOCUMENTO) {
-
         const uno = await this.personaser.devolverPersonaDescripcion(NRO_DOCUMENTO.NRO_DOCUMENTO)
         return uno;
     }
