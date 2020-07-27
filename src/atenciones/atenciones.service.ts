@@ -11,6 +11,8 @@ import { DistribucionIpressRepository } from 'src/distribucion-ipress/distribuci
 import { AtencionIpressRepository } from 'src/atencion-ipress/atencion-ipress-repository';
 import { TrabajadorIpressRepository } from 'src/personal/trabajador-ipress.repository';
 import { DiagnosticoRepository } from './diagnostico.repository';
+import { SolicitudesAtencionService } from 'src/solicitudes-atencion/solicitudes-atencion.service';
+import { SolicitudesAtencionRepository } from 'src/solicitudes-atencion/solicitudes-atencion.repository';
 
 
 @Injectable()
@@ -19,7 +21,7 @@ export class AtencionesService {
     constructor(private atenrep: AtencionesRepositoy, private personas: PersonaRepository,
         private hcs: HistoriaClinicaRepository, private distipress: DistribucionIpressRepository,
         private atenreps: AtencionIpressRepository, private trabajadoripress: TrabajadorIpressRepository,
-        private diagnosticos: DiagnosticoRepository) {
+        private diagnosticos: DiagnosticoRepository,private solics:SolicitudesAtencionRepository) {
 
     }
 
@@ -88,7 +90,6 @@ export class AtencionesService {
             }                
             })
 
-
             var atenciones = []
             await Promise.all(
     
@@ -96,7 +97,15 @@ export class AtencionesService {
     
                     let atencion: any = {}
                     Object.assign(atencion, element)
-                    const perosnaatendida = await this.personas.findOne({ where:{ID_PERSONA: element.ID_PACIENTE }})
+                    let perosnaatendida = await this.personas.findOne({where:{ ID_PERSONA: element.ID_PACIENTE} })
+    
+                    if (perosnaatendida.TELEFONO == null) {
+                        const solicitud = await this.solics.findOne({ ID_PACIENTE: perosnaatendida.ID_PERSONA })
+    
+                        if (solicitud != undefined) {
+                            perosnaatendida.TELEFONO = solicitud.TELEF_CONTACTO
+                        }
+                    }
                     const trabajadoripress = await this.trabajadoripress.findOne({ ID_TRABAJADOR_IPRESS: element.ID_RESPONSABLE })
                     const trabajadorpersona = await this.personas.findOne({ ID_PERSONA: trabajadoripress.ID_PERSONA })
                     const diagnosticos = await this.diagnosticos.find({ ID_ATENCION: element.ID_ATENCION })
@@ -107,8 +116,8 @@ export class AtencionesService {
                     atenciones.push(atencion)
     
                 }));
-
-        return atenciones;
+    
+            return atenciones
     }
 
 
