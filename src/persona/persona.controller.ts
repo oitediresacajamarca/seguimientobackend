@@ -32,7 +32,6 @@ export class PersonaController {
     }
     @Get('TIPO_DOC/:TIPO_DOC/NRO_DOCUMENTO/:NRO_DOCUMENTO')
     async getPersonaPorDocumento(@Param() NRO_DOCUMENTO,@Param() TIPO_DOC ) {
-        console.log(TIPO_DOC)
         const uno = await this.personaser.devolverPersonaPorDocumento(NRO_DOCUMENTO.NRO_DOCUMENTO,TIPO_DOC)
         return uno;
     }

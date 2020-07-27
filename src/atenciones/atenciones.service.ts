@@ -21,8 +21,14 @@ export class AtencionesService {
     constructor(private atenrep: AtencionesRepositoy, private personas: PersonaRepository,
         private hcs: HistoriaClinicaRepository, private distipress: DistribucionIpressRepository,
         private atenreps: AtencionIpressRepository, private trabajadoripress: TrabajadorIpressRepository,
-        private diagnosticos: DiagnosticoRepository,private solics:SolicitudesAtencionRepository) {
+        private diagnosticos: DiagnosticoRepository, private solics: SolicitudesAtencionRepository) {
 
+    }
+    async nuevaAtencion(body: any) {
+        let atencionnueva =await this.atenrep.save(body)
+        await this.solics.update({ ID_SOLICITUD: atencionnueva.ID_SOLICITUD, ESTADO: 'P' }, { ESTADO: 'A' })
+        atencionnueva.identiti=atencionnueva.ID_ATENCION
+        return atencionnueva
     }
 
     async devolverAtencionesPersona(id_persona: number): Promise<any> {
@@ -78,46 +84,48 @@ export class AtencionesService {
         let hasta = new Date(body.HASTA)
         hasta.setDate(hasta.getDate() + 1);
         desde.setDate(desde.getDate() + 1)
-   
-     
-     let resp = await this.atenreps.find({ where:
-             { SUB_REGION: Like('%' + body.SUB_REGION + '%'),
-             RED: Like('%' + body.RED + '%'),
-             MICRORED: Like('%' + body.MICRORED + '%'),
-             NOMBRE_ESTABLECIMIENTO: Like('%' + body.NOMBRE_ESTABLECIMIENTO + '%'),
-             FECHA: Between(desde, hasta),
-             ID_PACIENTE: Not(IsNull()), ID_HC: Not(IsNull())
-            }                
-            })
 
-            var atenciones = []
-            await Promise.all(
-    
-                resp.map(async element => {
-    
-                    let atencion: any = {}
-                    Object.assign(atencion, element)
-                    let perosnaatendida = await this.personas.findOne({where:{ ID_PERSONA: element.ID_PACIENTE} })
-    
-                    if (perosnaatendida.TELEFONO == null) {
-                        const solicitud = await this.solics.findOne({ ID_PACIENTE: perosnaatendida.ID_PERSONA })
-    
-                        if (solicitud != undefined) {
-                            perosnaatendida.TELEFONO = solicitud.TELEF_CONTACTO
-                        }
+
+        let resp = await this.atenreps.find({
+            where:
+            {
+                SUB_REGION: Like('%' + body.SUB_REGION + '%'),
+                RED: Like('%' + body.RED + '%'),
+                MICRORED: Like('%' + body.MICRORED + '%'),
+                NOMBRE_ESTABLECIMIENTO: Like('%' + body.NOMBRE_ESTABLECIMIENTO + '%'),
+                FECHA: Between(desde, hasta),
+                ID_PACIENTE: Not(IsNull()), ID_HC: Not(IsNull())
+            }
+        })
+
+        var atenciones = []
+        await Promise.all(
+
+            resp.map(async element => {
+
+                let atencion: any = {}
+                Object.assign(atencion, element)
+                let perosnaatendida = await this.personas.findOne({ where: { ID_PERSONA: element.ID_PACIENTE } })
+
+                if (perosnaatendida.TELEFONO == null) {
+                    const solicitud = await this.solics.findOne({ ID_PACIENTE: perosnaatendida.ID_PERSONA })
+
+                    if (solicitud != undefined) {
+                        perosnaatendida.TELEFONO = solicitud.TELEF_CONTACTO
                     }
-                    const trabajadoripress = await this.trabajadoripress.findOne({ ID_TRABAJADOR_IPRESS: element.ID_RESPONSABLE })
-                    const trabajadorpersona = await this.personas.findOne({ ID_PERSONA: trabajadoripress.ID_PERSONA })
-                    const diagnosticos = await this.diagnosticos.find({ ID_ATENCION: element.ID_ATENCION })
-                    atencion.personaatendida = perosnaatendida;
-                    atencion.trabajadoripress = trabajadoripress;
-                    atencion.trabajadorpersona = trabajadorpersona;
-                    atencion.diagnosticos = diagnosticos;
-                    atenciones.push(atencion)
-    
-                }));
-    
-            return atenciones
+                }
+                const trabajadoripress = await this.trabajadoripress.findOne({ ID_TRABAJADOR_IPRESS: element.ID_RESPONSABLE })
+                const trabajadorpersona = await this.personas.findOne({ ID_PERSONA: trabajadoripress.ID_PERSONA })
+                const diagnosticos = await this.diagnosticos.find({ ID_ATENCION: element.ID_ATENCION })
+                atencion.personaatendida = perosnaatendida;
+                atencion.trabajadoripress = trabajadoripress;
+                atencion.trabajadorpersona = trabajadorpersona;
+                atencion.diagnosticos = diagnosticos;
+                atenciones.push(atencion)
+
+            }));
+
+        return atenciones
     }
 
 

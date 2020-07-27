@@ -22,8 +22,8 @@ export class AtencionesEntity {
     ID_RESPONSABLE: number;
     @Column({name:'FECHA',nullable:true})
     FECHA: Date;
-    @Column({name:'HORA',nullable:true})
-    HORA: number;
+    @Column({name:'HORA',nullable:true,type:'time'})
+    HORA: Date;
     @Column({name:'FEC_REGISTRO',nullable:true})
     FEC_REGISTRO: number;
     @Column({name:'NIVEL_ATENCION',nullable:true})

@@ -19,8 +19,17 @@ export class AtencionesController {
     constructor(private atenser: AtencionesService, private personas: PersonaRepository
         , private trabajadoripress: TrabajadorIpressRepository, private diagnosticos: DiagnosticoRepository, private solicit: SolicitudesAtencionRepository) {
     }
-
     @Post('/registrar')
+    async registrarNueva(@Body() nuevaaatencion) {
+    
+        let fecha = new Date(nuevaaatencion.FECHA)
+        fecha.setDate(fecha.getDate() + 1)
+        nuevaaatencion.fecha = fecha;
+        let resp = await this.atenser.nuevaAtencion(nuevaaatencion)
+        return resp
+    }
+
+    @Post('/registrar2')
     async registrar(@Body() nuevaaatencion) {
 
         if (nuevaaatencion.ID_SOLICITUD == undefined) {
@@ -234,7 +243,7 @@ export class AtencionesController {
     @Post('atencionesRealizadasFiltrosFechasAmbito')
     async atencionesRealizadasFiltrosFechas(@Body() body) {
 
-        console.log(body)
+
         const resp = await this.atenser.devolverAtencionesFiltradasFechasAmbitoAd(body)
         return resp;
     }

@@ -48,7 +48,7 @@ export class FuatService {
     async generaFuatdeBase(ID_ATENCION) {
 
         const atencion = await this.atenr.findOne({ ID_ATENCION: ID_ATENCION });
-        console.log(atencion)
+      
         const trabajador = await this.trabajador_ipress.findOne({ ID_TRABAJADOR_IPRESS: atencion.ID_RESPONSABLE })
         const personatrabajador = await this.perrep.findOne({ ID_PERSONA: trabajador.ID_PERSONA })
 

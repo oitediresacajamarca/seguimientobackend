@@ -38,7 +38,6 @@ export class PersonaService {
     async devolverPersonaDescripcion(NRO_DOCUMENTO: string) {
         
         const persona = await this.personrep.findOne({ NRO_DOCUMENTO: NRO_DOCUMENTO })
-        console.log(persona)
         let dto: any = {}
         dto = persona;
 
