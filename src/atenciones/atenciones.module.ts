@@ -9,11 +9,14 @@ import { TrabajadorIpressRepository } from 'src/personal/trabajador-ipress.repos
 import { DiagnosticoRepository } from './diagnostico.repository';
 import { HistoriaClinicaRepository } from 'src/historia-clinica/historia-clinica.repository';
 import { SolicitudesAtencionRepository } from 'src/solicitudes-atencion/solicitudes-atencion.repository';
+import { DistribucionIpressRepository } from 'src/distribucion-ipress/distribucion-ipress-repository';
+import { AtencionIpressRepository } from 'src/atencion-ipress/atencion-ipress-repository';
 
 @Module({
   controllers: [AtencionesController],
   imports: [TypeOrmModule.forFeature([AtencionesRepositoy, TrabajadorIpressRepository, HistoriaClinicaRepository
-    , PersonaRepository, DiagnosticoRepository,SolicitudesAtencionRepository])],
+    , PersonaRepository, DiagnosticoRepository,SolicitudesAtencionRepository,
+    DistribucionIpressRepository,AtencionIpressRepository])],
   providers: [AtencionesService]
 
 })

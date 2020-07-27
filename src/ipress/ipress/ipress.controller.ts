@@ -13,4 +13,10 @@ export class IpressController {
         const resp = await this.ipress.devolverIpress(cod_ipres.cod_ipress);
         return resp;
     }
+    @Get('distrito/:ID_DISTRITO')
+    async devolverIpressPorDistrito(@Param() ID_DISTRITO) {
+      
+        const resp = await this.ipress.devolverIpressPorDistrito(ID_DISTRITO.ID_DISTRITO);
+        return resp;
+    }
 }

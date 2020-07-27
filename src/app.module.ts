@@ -30,6 +30,8 @@ import { ImpresionesModule } from './impresiones/impresiones.module';
 
 import { ExamenesFisicosAtencionModule } from './examenes-fisicos-atencion/examenes-fisicos-atencion.module';
 import { AtencionDetalleModule } from './atencion-detalle/atencion-detalle.module';
+import { DistribucionIpressModule } from './distribucion-ipress/distribucion-ipress.module';
+import { AtencionIpressModule } from './atencion-ipress/atencion-ipress.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -58,7 +60,9 @@ import { AtencionDetalleModule } from './atencion-detalle/atencion-detalle.modul
     LogsModule,
     ImpresionesModule,
     ExamenesFisicosAtencionModule,
-    AtencionDetalleModule],
+    AtencionDetalleModule,
+    DistribucionIpressModule,
+    AtencionIpressModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -13,4 +13,9 @@ export class IpressService {
     const resp= await    this.IpressRep.find({ COD_IPRESS: cod_ipress })
     return resp;
     }
+
+    async devolverIpressPorDistrito(ID_DISTRITO: string) {
+        const resp= await    this.IpressRep.find({ ID_DISTRITO: ID_DISTRITO })
+        return resp;
+        }
 }

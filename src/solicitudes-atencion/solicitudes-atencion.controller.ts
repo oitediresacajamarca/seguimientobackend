@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { SolicitudesAtencionService } from './solicitudes-atencion.service';
 
 @Controller('solicitudes-atencion')
@@ -11,6 +11,13 @@ export class SolicitudesAtencionController {
         
     
         const soli = await this.solicitudes.buscarSolicitudDocumento(NRO_DOCUMENTO.NRO_DOCUMENTO)
+        return soli;
+    }
+    @Post('nueva')
+    async nueva_solicitud(@Body() body) {
+        
+    
+        const soli = await this.solicitudes.guardarNuevaSolicitud(body)
         return soli;
     }
 

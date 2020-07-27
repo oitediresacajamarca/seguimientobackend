@@ -176,10 +176,10 @@ export class AtencionesController {
                 let atencion: any = {}
                 Object.assign(atencion, element)
                 let perosnaatendida = await this.personas.findOne({ ID_PERSONA: element.ID_PACIENTE })
-                             
+
                 if (perosnaatendida.TELEFONO == null) {
                     const solicitud = await this.solicit.findOne({ ID_PACIENTE: perosnaatendida.ID_PERSONA })
-                  
+
                     if (solicitud != undefined) {
                         perosnaatendida.TELEFONO = solicitud.TELEF_CONTACTO
                     }
@@ -229,5 +229,13 @@ export class AtencionesController {
         return atenciones
 
 
+    }
+
+    @Post('atencionesRealizadasFiltrosFechasAmbito')
+    async atencionesRealizadasFiltrosFechas(@Body() body) {
+
+        console.log(body)
+        const resp = await this.atenser.devolverAtencionesFiltradasFechasAmbitoAd(body)
+        return resp;
     }
 }

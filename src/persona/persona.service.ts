@@ -9,6 +9,10 @@ export class PersonaService {
     constructor(private personrep: PersonaRepository, private geos: DistribucionGeograficaRepository) {
 
     }
+    async devolverPersonaPorDocumento(NRO_DOCUMENTO:string,TIPO_DOC:string){
+        const persona = await this.personrep.findOne({NRO_DOCUMENTO:NRO_DOCUMENTO})
+        return persona;
+    }
     async devolverOne(num_doc: string) {
 
         const persona = await this.personrep.findOne(num_doc)
