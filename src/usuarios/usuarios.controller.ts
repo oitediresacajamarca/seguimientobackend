@@ -24,6 +24,7 @@ export class UsuariosController {
 
 
         let re: any = await this.usua.loguearyambito(login.root.username, login.root.clave, login.root.peso)
+       
 
         return res.status(HttpStatus.OK).json({ bien: "bien", respuesta: re })
 

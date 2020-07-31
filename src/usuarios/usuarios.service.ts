@@ -18,13 +18,15 @@ export class UsuariosService {
     }
     async loguearyambito(username: string, clave: string, peso: number): Promise<Usuarios> {
 
-        const pr = await (await this.mod.findOne(
+        const pr = await this.mod.findOne(
             {
                 username: username,
                 clave: clave,
                 "ambitos.peso": { "$lte": peso },
                 "ambitos.peso_sup": { "$gt": peso }
-            }))
+            })
+
+          
 
         return pr;
 

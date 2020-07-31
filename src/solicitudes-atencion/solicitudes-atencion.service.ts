@@ -19,7 +19,7 @@ export class SolicitudesAtencionService {
 
     async guardarNuevaSolicitud(persona: any) {
         let fecha = new Date()
-        let solicitud_creada = {};
+        let solicitud_creada = {};  
 
         const personahallada = await this.personas.findOne({ where: { NRO_DOCUMENTO: persona.NRO_DOCUMENTO, ID_TIPOD: persona.ID_TIPOD } });
 
