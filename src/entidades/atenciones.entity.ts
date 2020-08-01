@@ -30,5 +30,7 @@ export class AtencionesEntity {
     NIVEL_ATENCION: number;
     @Column({name:'CONSENTIMIENTO',nullable:true})
     CONSENTIMIENTO: number;
+    @Column({name:'COD_CARTERA',nullable:true})
+    COD_CARTERA:string
 }
 

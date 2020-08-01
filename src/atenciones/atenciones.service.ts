@@ -13,6 +13,7 @@ import { TrabajadorIpressRepository } from 'src/personal/trabajador-ipress.repos
 import { DiagnosticoRepository } from './diagnostico.repository';
 import { SolicitudesAtencionService } from 'src/solicitudes-atencion/solicitudes-atencion.service';
 import { SolicitudesAtencionRepository } from 'src/solicitudes-atencion/solicitudes-atencion.repository';
+import { Console } from 'console';
 
 
 @Injectable()

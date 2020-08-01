@@ -26,6 +26,8 @@ export class SolicitudesAtencionEntity {
     @Column()
     CORREO: string;
     @Column()
-    ID_DISTRITO: string
+    ID_DISTRITO: string;
+    @Column()
+    COD_CARTERA:string;
 
 }

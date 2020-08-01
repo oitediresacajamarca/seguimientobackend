@@ -9,23 +9,16 @@ export class SolicitudesAtencionService {
     constructor(private solicitudaten: SolicitudesAtencionRepository, private personas: PersonaRepository,
         private pacientes: PacienteRepository) { }
     async buscarSolicitudDocumento(NRO_DOCUMENTO: string) {
-
         let persona = await this.personas.findOne({ NRO_DOCUMENTO: NRO_DOCUMENTO })
         const solicitud = await this.solicitudaten.findOne({ where: { ID_PACIENTE: persona.ID_PERSONA, ESTADO: "P" } })
-
         return solicitud
-
     }
 
     async guardarNuevaSolicitud(persona: any) {
         let fecha = new Date()
         let solicitud_creada = {};  
-
         const personahallada = await this.personas.findOne({ where: { NRO_DOCUMENTO: persona.NRO_DOCUMENTO, ID_TIPOD: persona.ID_TIPOD } });
-
         if (personahallada) {
-
-
             let paciente = await this.pacientes.findOne({ where: { ID_PACIENTE: personahallada.ID_PERSONA } })
             if (paciente) {
                 let solicitupendiente = await this.solicitudaten.findOne({ where: { ID_PACIENTE: paciente.ID_PACIENTE, ESTADO: 'P' } })
