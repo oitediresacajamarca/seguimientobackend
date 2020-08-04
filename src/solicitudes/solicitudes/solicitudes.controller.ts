@@ -38,7 +38,7 @@ export class SolicitudesController {
 
         await sql.connect(this.urlconect)
         const consulta = `update [SOLICITUD_PACIENTE] 
-    set [ESTADO]='CERRADO' where ID_SOLICITUD =${cod_busqueda.cod_busqueda} ;
+    set [ESTADO]='C' where ID_SOLICITUD =${cod_busqueda.cod_busqueda} ;
 `
         const result = await sql.query(consulta)
 

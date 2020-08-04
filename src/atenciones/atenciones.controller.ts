@@ -1,11 +1,8 @@
 import { Controller, Post, Body, Param, Get } from '@nestjs/common';
 import { AtencionesService } from './atenciones.service';
 import { PersonaRepository } from 'src/repositorios/persona.repository';
-import { async } from 'rxjs/internal/scheduler/async';
 import { TrabajadorIpressRepository } from 'src/personal/trabajador-ipress.repository';
 import { DiagnosticoRepository } from './diagnostico.repository';
-import console = require('console');
-import { Console } from 'console';
 import { SolicitudesAtencionRepository } from 'src/solicitudes-atencion/solicitudes-atencion.repository';
 var mssql = require('mssql')
 var cadena_conexion = 'mssql://sa:.@localhost/risc_2030'
@@ -17,7 +14,8 @@ cadena_conexion = process.env.url_database;
 @Controller('atenciones')
 export class AtencionesController {
     constructor(private atenser: AtencionesService, private personas: PersonaRepository
-        , private trabajadoripress: TrabajadorIpressRepository, private diagnosticos: DiagnosticoRepository, private solicit: SolicitudesAtencionRepository) {
+        , private trabajadoripress: TrabajadorIpressRepository, private diagnosticos: DiagnosticoRepository,
+         private solicit: SolicitudesAtencionRepository) {
     }
     @Post('/registrar')
     async registrarNueva(@Body() nuevaaatencion) {
