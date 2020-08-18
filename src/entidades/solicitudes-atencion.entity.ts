@@ -18,7 +18,7 @@ export class SolicitudesAtencionEntity {
     @Column()
     REFERENCIA: string;
     @Column()
-    FECHA_SOLICITUD: string;
+    FECHA_SOLICITUD: Date;
     @Column()
     ID_IPRESS: string;
     @Column()

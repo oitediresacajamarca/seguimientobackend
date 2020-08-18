@@ -14,10 +14,15 @@ export class SolicitudesAtencionController {
         return soli;
     }
     @Post('nueva')
-    async nueva_solicitud(@Body() body) {
-        
+    async nueva_solicitud(@Body() body) {      
     
         const soli = await this.solicitudes.guardarNuevaSolicitud(body)
+        return soli;
+    }
+    @Post('derivar')
+    async derivar_paciente(@Body() body) {      
+   
+        const soli = await this.solicitudes.derivar(body.ID_PACIENTE,body.derivaciones,body.solicitud)
         return soli;
     }
 

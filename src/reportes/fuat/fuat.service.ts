@@ -64,8 +64,8 @@ export class FuatService {
         const solicitud = await this.solicitudr.findOne({ ID_SOLICITUD: atencion.ID_SOLICITUD })
 
         if (solicitud != null) {
-            this.formatofuat.fechasolicitud = solicitud.FECHA_SOLICITUD.substring(0, 10);
-            this.formatofuat.horasolicitud = solicitud.FECHA_SOLICITUD.substring(11, 20);
+            this.formatofuat.fechasolicitud = solicitud.FECHA_SOLICITUD.toLocaleDateString('es-PE');
+            this.formatofuat.horasolicitud = solicitud.FECHA_SOLICITUD.toLocaleTimeString('es-PE');
         }
         const paciente = await this.perrep.findOne({ ID_PERSONA: atencion.ID_PACIENTE })
 

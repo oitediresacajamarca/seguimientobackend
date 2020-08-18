@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { SolicitudesAtencionRepository } from './solicitudes-atencion.repository';
 import { PersonaRepository } from 'src/repositorios/persona.repository';
 import { PacienteRepository } from 'src/paciente/paciente.repository';
+import { In } from 'typeorm';
+import { Console } from 'console';
 
 @Injectable()
 export class SolicitudesAtencionService {
@@ -10,7 +12,7 @@ export class SolicitudesAtencionService {
         private pacientes: PacienteRepository) { }
     async buscarSolicitudDocumento(NRO_DOCUMENTO: string) {
         let persona = await this.personas.findOne({ NRO_DOCUMENTO: NRO_DOCUMENTO })
-        const solicitud = await this.solicitudaten.findOne({ where: { ID_PACIENTE: persona.ID_PERSONA, ESTADO: "P" } })
+        const solicitud = await this.solicitudaten.findOne({ where: { ID_PACIENTE: persona.ID_PERSONA, ESTADO: In(["P", "D"]) } })
         return solicitud
     }
 
@@ -85,14 +87,38 @@ export class SolicitudesAtencionService {
             })
 
         }
-        if(solicitud_creada!=null){
+        if (solicitud_creada != null) {
 
-        return {mensage:"solicitud creada exitosamente",cod_respuesta:1};
-    
+            return { mensage: "solicitud creada exitosamente", cod_respuesta: 1 };
+
+        }
+        else {
+            return { mensage: "solicitud creada exitosamente", cod_respuesta: 0 };
+        }
+
     }
-    else {
-        return {mensage:"solicitud creada exitosamente",cod_respuesta:0};
-    }
+    async derivar(ID_PACIENTE: number, derivaciones: any[], solicitud: any) {
+        console.log(solicitud)
+        return await Promise.all(
+            derivaciones.map(async (derivacion) => {
+
+                return await this.solicitudaten.save({
+                    ID_PACIENTE: ID_PACIENTE,
+                    CORREO: solicitud.CORREO,
+                    ESTADO: 'D',
+                    COD_CARTERA: derivacion.COD_CARTERA,
+                    DESCRIPCION: derivacion.Motivo,
+                    ID_DISTRITO: solicitud.ID_DISTRITO,
+                    TELEF_CONTACTO:solicitud.TELEF_CONTACTO,
+                    ID_IPRESS:solicitud.ID_IPRESS,
+                    FECHA_SOLICITUD:new Date()
+                })
+
+
+
+
+            })
+        )
 
     }
 }

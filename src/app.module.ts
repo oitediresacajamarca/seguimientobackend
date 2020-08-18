@@ -35,6 +35,9 @@ import { AtencionIpressModule } from './atencion-ipress/atencion-ipress.module';
 import { IpressCarteraModule } from './ipress-cartera/ipress-cartera.module';
 import { CarteraServicioModule } from './cartera-servicio/cartera-servicio.module';
 import { UpssModule } from './upss/upss.module';
+import { EventosGateway } from './eventos.gateway';
+import { CpmsFullModule } from './cpms-full/cpms-full.module';
+import { HeatmapModule } from './heatmap/heatmap.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -68,8 +71,10 @@ import { UpssModule } from './upss/upss.module';
     AtencionIpressModule,
     IpressCarteraModule,
     CarteraServicioModule,
-    UpssModule],
+    UpssModule,
+    CpmsFullModule,
+    HeatmapModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, EventosGateway],
 })
 export class AppModule { }
