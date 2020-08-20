@@ -98,7 +98,7 @@ export class SolicitudesAtencionService {
 
     }
     async derivar(ID_PACIENTE: number, derivaciones: any[], solicitud: any) {
-        console.log(solicitud)
+        
         return await Promise.all(
             derivaciones.map(async (derivacion) => {
 

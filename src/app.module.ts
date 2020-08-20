@@ -38,6 +38,8 @@ import { UpssModule } from './upss/upss.module';
 import { EventosGateway } from './eventos.gateway';
 import { CpmsFullModule } from './cpms-full/cpms-full.module';
 import { HeatmapModule } from './heatmap/heatmap.module';
+import { UbigeosDistritosModule } from './ubigeos-distritos/ubigeos-distritos.module';
+import { BaseNotiModule } from './base-noti/base-noti.module';
 
 @Module({
   imports: [ServeStaticModule.forRoot({
@@ -73,7 +75,9 @@ import { HeatmapModule } from './heatmap/heatmap.module';
     CarteraServicioModule,
     UpssModule,
     CpmsFullModule,
-    HeatmapModule],
+    HeatmapModule,
+    UbigeosDistritosModule,
+    BaseNotiModule],
   controllers: [AppController],
   providers: [AppService, EventosGateway],
 })
