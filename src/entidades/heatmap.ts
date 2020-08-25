@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
-@Entity('heatmap')
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, ViewEntity } from "typeorm";
+@ViewEntity('heatmap_ajustado_confirmado')
 export class Heatmap {
     @PrimaryGeneratedColumn()
     id:number

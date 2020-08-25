@@ -17,7 +17,7 @@ import { PersonaModule } from './persona/persona.module';
 import { MedicamentoModule } from './medicamento/medicamento.module';
 import { TratamientoModule } from './tratamiento/tratamiento.module';
 import { IpressModule } from './ipress/ipress.module';
-import { RecetaController } from './impresiones/receta/receta.controller';
+
 import { DistribucionGeograficaModule } from './distribucion-geografica/distribucion-geografica.module';
 import { AtencionRegModule } from './atencion-reg/atencion-reg.module';
 import { SolicitudesAtencionModule } from './solicitudes-atencion/solicitudes-atencion.module';
